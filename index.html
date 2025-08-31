@@ -1,45 +1,100 @@
----
-layout: default
-title: 首页
----
-
-<div class="max-w-4xl mx-auto">
-  <div class="text-center mb-8">
-    <h1 class="text-4xl font-bold mb-4">欢迎来到我的生活记录</h1>
-    <p class="text-xl text-gray-600 dark:text-gray-400">分享生活中的美好瞬间</p>
-  </div>
-
-  <div class="grid gap-6">
-    {% for post in site.posts limit:5 %}
-      <article class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-        {% if post.image %}
-          <img src="{{ post.image }}" alt="{{ post.title }}" class="w-full h-48 object-cover rounded mb-4">
-        {% endif %}
-        <h2 class="text-2xl font-semibold mb-2">
-          <a href="{{ post.url }}" class="hover:text-blue-600 dark:hover:text-blue-400">{{ post.title }}</a>
-        </h2>
-        <p class="text-gray-600 dark:text-gray-400 mb-3">{{ post.date | date: "%Y年%m月%d日" }}</p>
-        <div class="prose dark:prose-invert max-w-none mb-4">
-          {{ post.excerpt | strip_html | truncatewords:30 }}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>我的生活记录 - GitHub Pages</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-xl font-bold text-gray-800">我的生活记录</div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-blue-600">首页</a>
+                    <a href="categories.html" class="text-gray-600 hover:text-blue-600">分类</a>
+                    <a href="about.html" class="text-gray-600 hover:text-blue-600">关于</a>
+                </div>
+            </div>
         </div>
-        <div class="flex justify-between items-center">
-          <div class="text-sm text-gray-500">
-            分类: {{ post.categories | join: ", " }}
-            {% if post.tags.size > 0 %}
-              | 标签: {{ post.tags | join: ", " }}
-            {% endif %}
-          </div>
-          <a href="{{ post.url }}" class="text-blue-600 hover:underline">阅读更多 →</a>
-        </div>
-      </article>
-    {% endfor %}
-  </div>
+    </nav>
 
-  {% if site.posts.size > 5 %}
-    <div class="text-center mt-8">
-      <a href="/archive.html" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition-colors">
-        查看所有文章
-      </a>
-    </div>
-  {% endif %}
-</div>
+    <!-- 主要内容 -->
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <!-- 欢迎区域 -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">欢迎来到我的生活记录</h1>
+            <p class="text-xl text-gray-600">记录生活中的每一个美好瞬间</p>
+        </div>
+
+        <!-- 最新文章 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">最新文章</h2>
+            
+            <!-- 文章卡片 -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-4">
+                <div class="flex items-start space-x-4">
+                    <div class="bg-blue-100 rounded-lg p-3">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">一次难忘的旅行</h3>
+                        <p class="text-gray-600 mb-2">今天我去了一个美丽的山区，风景如画。沿途看到了许多野生动物，还尝试了当地美食...</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">2025年08月31日</span>
+                            <span class="text-sm text-blue-600">旅行 · 冒险</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 更多文章提示 -->
+            <div class="text-center">
+                <a href="archive.html" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    查看所有文章
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- 快速导航 -->
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <div class="text-3xl mb-2">📚</div>
+                <h3 class="text-lg font-semibold mb-2">文章归档</h3>
+                <p class="text-gray-600 text-sm">浏览所有历史文章</p>
+                <a href="archive.html" class="mt-4 inline-block text-blue-600 hover:underline">查看 →</a>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <div class="text-3xl mb-2">🏷️</div>
+                <h3 class="text-lg font-semibold mb-2">文章分类</h3>
+                <p class="text-gray-600 text-sm">按主题浏览文章</p>
+                <a href="categories.html" class="mt-4 inline-block text-blue-600 hover:underline">浏览 →</a>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <div class="text-3xl mb-2">🔍</div>
+                <h3 class="text-lg font-semibold mb-2">搜索文章</h3>
+                <p class="text-gray-600 text-sm">快速找到感兴趣的内容</p>
+                <a href="search.html" class="mt-4 inline-block text-blue-600 hover:underline">搜索 →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p>&copy; 2024 我的生活记录. 使用 GitHub Pages 构建</p>
+            <p class="text-gray-400 text-sm mt-2">记录生活，分享美好</p>
+        </div>
+    </footer>
+</body>
+</html>
