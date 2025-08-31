@@ -1,0 +1,16 @@
+title: 我的生活记录
+description: 一个记录生活点滴的个人网页
+baseurl: "" # 如果是根目录，留空
+url: "" # 你的 GitHub Pages URL，例如 https://username.github.io
+permalink: /:year/:month/:day/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

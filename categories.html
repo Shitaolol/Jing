@@ -1,0 +1,23 @@
+---
+layout: default
+title: 分类
+---
+<h2 class="text-2xl font-semibold mb-4">按分类浏览</h2>
+<ul class="list-disc pl-6">
+  {% for category in site.categories %}
+    <li class="mb-2">
+      <a href="#{{ category[0] }}" class="text-blue-600 hover:underline">{{ category[0] }} ({{ category[1].size }})</a>
+    </li>
+  {% endfor %}
+</ul>
+
+{% for category in site.categories %}
+  <h3 id="{{ category[0] }}" class="text-xl font-semibold mt-6 mb-2">{{ category[0] }}</h3>
+  <ul class="list-disc pl-6">
+    {% for post in category[1] %}
+      <li class="mb-2">
+        <a href="{{ post.url }}" class="hover:underline">{{ post.title }}</a> - {{ post.date | date: "%Y-%m-%d" }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endfor %}

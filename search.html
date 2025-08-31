@@ -1,0 +1,48 @@
+---
+layout: default
+title: 搜索
+---
+<h2 class="text-2xl font-semibold mb-4">搜索记录</h2>
+<input type="text" id="search-input" placeholder="输入关键词..." class="w-full p-2 border border-gray-300 rounded mb-4">
+<div id="search-results" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+<script>
+  // 构建 Lunr 索引
+  var idx = lunr(function () {
+    this.ref('url');
+    this.field('title');
+    this.field('content');
+    this.field('tags');
+
+    {% for post in site.posts %}
+      this.add({
+        "url": "{{ post.url }}",
+        "title": "{{ post.title | escape }}",
+        "content": "{{ post.content | strip_html | escape }}",
+        "tags": "{{ post.tags | join: ' ' | escape }}"
+      });
+    {% endfor %}
+  });
+
+  // 搜索函数
+  document.getElementById('search-input').addEventListener('input', function() {
+    var query = this.value;
+    var results = idx.search(query);
+    var resultsContainer = document.getElementById('search-results');
+    resultsContainer.innerHTML = '';
+
+    results.forEach(function(result) {
+      var post = {% assign posts = site.posts | jsonify %}.find(p => p.url === result.ref);
+      if (post) {
+        var div = document.createElement('div');
+        div.className = 'bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden p-4';
+        div.innerHTML = `
+          <h3 class="text-xl font-semibold mb-2"><a href="${post.url}" class="hover:underline">${post.title}</a></h3>
+          <p class="text-gray-600 dark:text-gray-400">${post.date}</p>
+        `;
+        resultsContainer.appendChild(div);
+      }
+    });
+  });
+</script>

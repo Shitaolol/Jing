@@ -1,0 +1,13 @@
+---
+title: "一次难忘的旅行"
+date: 2025-08-31
+categories: 旅行
+tags: [冒险, 风景]
+image: /assets/images/travel.jpg
+---
+
+今天我去了一个美丽的山区，风景如画。沿途看到了许多野生动物，还尝试了当地美食。
+
+![风景照](/assets/images/travel.jpg)
+
+这是一次难忘的经历！

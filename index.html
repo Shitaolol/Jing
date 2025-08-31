@@ -1,0 +1,45 @@
+---
+layout: default
+title: 首页
+---
+
+<div class="max-w-4xl mx-auto">
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold mb-4">欢迎来到我的生活记录</h1>
+    <p class="text-xl text-gray-600 dark:text-gray-400">分享生活中的美好瞬间</p>
+  </div>
+
+  <div class="grid gap-6">
+    {% for post in site.posts limit:5 %}
+      <article class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+        {% if post.image %}
+          <img src="{{ post.image }}" alt="{{ post.title }}" class="w-full h-48 object-cover rounded mb-4">
+        {% endif %}
+        <h2 class="text-2xl font-semibold mb-2">
+          <a href="{{ post.url }}" class="hover:text-blue-600 dark:hover:text-blue-400">{{ post.title }}</a>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-3">{{ post.date | date: "%Y年%m月%d日" }}</p>
+        <div class="prose dark:prose-invert max-w-none mb-4">
+          {{ post.excerpt | strip_html | truncatewords:30 }}
+        </div>
+        <div class="flex justify-between items-center">
+          <div class="text-sm text-gray-500">
+            分类: {{ post.categories | join: ", " }}
+            {% if post.tags.size > 0 %}
+              | 标签: {{ post.tags | join: ", " }}
+            {% endif %}
+          </div>
+          <a href="{{ post.url }}" class="text-blue-600 hover:underline">阅读更多 →</a>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+
+  {% if site.posts.size > 5 %}
+    <div class="text-center mt-8">
+      <a href="/archive.html" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition-colors">
+        查看所有文章
+      </a>
+    </div>
+  {% endif %}
+</div>
